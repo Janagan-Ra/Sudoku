@@ -45,9 +45,9 @@ def main():
 
     for i in range(9):
         for j in range(9):
-            value = font.render(str(board[i][j]),True,(0,200,0))
-            display.blit(value,((j+1)*50 + 50, (i+1)*50 + 50))
-
+            value = font.render(str(board[i][j]),True,(0,0,0))
+            display.blit(value,((j+1)*(width/16) + 15, (i+1)*(hight/16) + 15))
+    pygame.display.update()
     
     while True:
         for event in pygame.event.get():
