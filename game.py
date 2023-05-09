@@ -74,14 +74,16 @@ def showCor(display,board,legal,solution,font):
 def drawButtons(display,font):
     showCorrect = font.render('Show Right',True,'white')
     buttonCorrect = pygame.Rect(600,100,170,40)
-
+    newGame = font.render('New Game',True,'white')
+    buttonNew = pygame.Rect(600,300,170,40)
     showSol = font.render('Solution',True,'white')
     buttonSol = pygame.Rect(600,200,170,40)
+    pygame.draw.rect(display,(57,57,57),buttonNew)
     pygame.draw.rect(display,(57,57,57),buttonCorrect)
     pygame.draw.rect(display,(57,57,57),buttonSol)
     display.blit(showSol,(buttonSol.x + 5, buttonSol.y +5))
     display.blit(showCorrect,(buttonCorrect.x + 5, buttonCorrect.y +5))
-    return buttonCorrect,buttonSol,showCorrect,showSol
+    return buttonCorrect,buttonSol,showCorrect,showSol,newGame,buttonNew
 
 def main():
     sugokuAPI = requests.get("https://sugoku.onrender.com/board?difficulty=easy")
@@ -92,7 +94,7 @@ def main():
     drawBoard(board,display,font)
     legal = Solver.copy.deepcopy(board)
     solution = Solver.solveSudoku(board)
-    buttonCorrect,buttonSol,showCorrect ,showSol = drawButtons(display,font)
+    buttonCorrect,buttonSol,showCorrect ,showSol,newGame,buttonNew = drawButtons(display,font)
 
     while True:
         
@@ -104,6 +106,9 @@ def main():
 
                 if buttonSol.collidepoint(event.pos):
                     drawBoard(solution,display,font)
+
+                if buttonNew.collidepoint(event.pos):
+                    main()
 
                 else:    
                     position = pygame.mouse.get_pos()
@@ -118,11 +123,17 @@ def main():
         else:
             pygame.draw.rect(display,(57,57,57),buttonCorrect)
 
+        if buttonNew.x <= x <= buttonNew.x +170 and buttonNew.y <= y <= buttonNew.y + 40:
+            pygame.draw.rect(display,(100,100,100),buttonNew)
+        else:
+            pygame.draw.rect(display,(57,57,57),buttonNew)   
+
         if buttonSol.x <= x <= buttonSol.x +170 and buttonSol.y <= y <= buttonSol.y + 40:
             pygame.draw.rect(display,(100,100,100),buttonSol)
         else:
             pygame.draw.rect(display,(57,57,57),buttonSol)
 
+        display.blit(newGame,(buttonNew.x + 5, buttonNew.y +5))
         display.blit(showSol,(buttonSol.x + 5, buttonSol.y +5))
         display.blit(showCorrect,(buttonCorrect.x + 5, buttonCorrect.y +5))
         pygame.display.update()
