@@ -44,7 +44,7 @@ def drawBoard(board, display, font):
 
 
 def main():
-    sugokuAPI = requests.get("https://sugoku.onrender.com/board?difficulty=medium")
+    sugokuAPI = requests.get("https://sugoku.onrender.com/board?difficulty=easy")
     board = sugokuAPI.json()['board']
     pygame.init()
     font = pygame.font.SysFont('arial',30)

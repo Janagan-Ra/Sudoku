@@ -26,8 +26,8 @@ def checkExisting(board,x,y,check):
 def valid(board,x,y):
     if (board[x][y] !=0  and y + 1 < 9):
         return valid(board,x,y+1)
-    elif (board[x][y] !=0  and x + 1 < 9):
-        return valid(board,x+1,y)
+    if (board[x][y] !=0  and x + 1 < 9):
+        return valid(board,x+1,0)
     elif (board[x][y] != 0):
         return False
     
@@ -45,6 +45,6 @@ def valid(board,x,y):
 def solveSudoku(board):
     copyBoard = copy.deepcopy(board)
     valid(copyBoard,0,0)
-    if (solved(copyBoard)):
-        return copyBoard 
+    if (solved(copyBoard)):  
+        return copyBoard
     return board
