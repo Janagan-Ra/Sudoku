@@ -1,4 +1,6 @@
 
+import copy
+
 def solved(board):
     for i in range(9):
         for j in range(9):
@@ -14,14 +16,11 @@ def checkExisting(board,x,y,check):
     #finds 3x3 grid to check based on x and y
     x = 0 if x < 3 else 3 if x < 6 else 6
     y = 0 if y < 3 else 3 if y < 6 else 6
-    i = x
-    while i < x+3:
-        j = y
-        while j < y+3:
+
+    for i in range(x,x+3):
+        for j in range(y,y+3):
             if board[i][j] == check:
                 return True
-            j + 1
-        i + 1
     return False
 
 def valid(board,x,y):
@@ -44,8 +43,8 @@ def valid(board,x,y):
     return False
 
 def solveSudoku(board):
-    copy = board.copy()
-    valid(copy,0,0)
-    if (solved(copy)):
-        board = copy.copy()
-    
+    copyBoard = copy.deepcopy(board)
+    valid(copyBoard,0,0)
+    if (solved(copyBoard)):
+        return copyBoard 
+    return board

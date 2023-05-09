@@ -49,7 +49,7 @@ def main():
     pygame.init()
     font = pygame.font.SysFont('arial',30)
     display = pygame.display.set_mode((WIDTH,HIGHT))
-    #solution = Solver.solveSudoku(board)
+    solution = Solver.solveSudoku(board)
     drawBoard(board,display,font)
 
     
