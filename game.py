@@ -24,8 +24,9 @@ def insert(legal, board, display, position, font):
                     value = font.render(str(event.key-48), True, (0,0,0))
                     display.blit(value, (position[0]*50 + CORRECTION, position[1]*50 + CORRECTION))
                     board[position[1]-1][position[0]-1] = event.key - 48
+                    drawLines(display)
                     pygame.display.update()
-                    return (position[1],position[0])
+                    return 
                 return
             
 def drawLines(display):
