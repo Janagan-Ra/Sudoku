@@ -19,11 +19,12 @@ def insert(legal, board, display, position, font):
                     if legal[int(position[1]-1)][int(position[0]-1)] != 0:
                         return
                     if board[int(position[1]-1)][int(position[0]-1)] != 0:
-                        pygame.draw.rect(display, BGC, (position[0]*50 + CORRECTION, position[1]*50+ CORRECTION,50 -CORRECTION , 50 - CORRECTION))
+                        pygame.draw.rect(display, BGC, (position[0]*(WIDTH/SCALE)  + CORRECTION, position[1]*(WIDTH/SCALE) +
+                                                         CORRECTION,(HIGHT/SCALE) -CORRECTION , (HIGHT/SCALE) - CORRECTION))
                         pygame.display.update()
                     if (0 < event.key - 48 < 10):
                         value = font.render(str(event.key-48), True, (0,0,0))
-                        display.blit(value, (position[0]*50 + CORRECTION, position[1]*50 + CORRECTION))
+                        display.blit(value, (position[0]*(WIDTH/SCALE) + CORRECTION, position[1]*(HIGHT/SCALE) + CORRECTION))
                         board[position[1]-1][position[0]-1] = event.key - 48
                         drawLines(display)
                         pygame.display.update()
@@ -50,7 +51,7 @@ def drawBoard(board, display, font):
         for j in range(9):
             if (board[i][j] != 0):
                 value = font.render(str(board[i][j]),True,(1,150,32))
-                display.blit(value,((j+1)*(WIDTH/SCALE) + 15, (i+1)*(HIGHT/SCALE) + 15))
+                display.blit(value,((j+1)*(WIDTH/SCALE) + CORRECTION, (i+1)*(HIGHT/SCALE) + CORRECTION))
     drawButtons(display,font)
     pygame.display.update()
 
